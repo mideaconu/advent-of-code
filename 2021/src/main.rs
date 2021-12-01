@@ -14,4 +14,9 @@ struct Cli {
 
 fn main() {
     let args = Cli::from_args();
+
+    match args.day {
+        1 => challenges::day1::solve(args.input_file),
+        _ => println!("Problem for day {} not implemented", args.day)
+    }
 }
