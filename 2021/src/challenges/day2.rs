@@ -6,6 +6,7 @@ use std::io::BufRead;
 struct Path {
     horizontal: u32,
     depth: u32,
+    aim: u32,
 }
 
 impl Path {
@@ -15,8 +16,30 @@ impl Path {
 }
 
 
+fn solve_problem_2(input: &Vec<Vec<String>>) -> u32 {
+    let mut path = Path { horizontal: 0, depth: 0, aim: 0 };
+    for command in input {
+        let step = command[1].parse::<u32>().unwrap();
+        match command[0].as_str() {
+            "forward" => {
+                path.horizontal += step;
+                path.depth += path.aim * step;
+            },
+            "up" => {
+                path.aim -= step;
+            },
+            "down" => {
+                path.aim += step;
+            },
+            _ => ()
+        }
+    }
+    return path.area();
+}
+
+
 fn solve_problem_1(input: &Vec<Vec<String>>) -> u32 {
-    let mut path = Path { horizontal: 0, depth: 0 };
+    let mut path = Path { horizontal: 0, depth: 0, aim: 0 };
     for command in input {
         let step = command[1].parse::<u32>().unwrap();
         match command[0].as_str() {
@@ -39,5 +62,5 @@ pub fn solve(input_path: std::path::PathBuf) {
         .map(|line| line.unwrap().split_whitespace().map(String::from).collect::<Vec<String>>())
         .collect();
 
-    println!("Solution to part 1: {}", solve_problem_1(&commands));
+    println!("Solution to part 1: {}, solution to part 2: {}", solve_problem_1(&commands), solve_problem_2(&commands));
 }
