@@ -17,6 +17,7 @@ fn main() {
 
     match args.day {
         1 => challenges::day1::solve(args.input_file),
+        2 => challenges::day2::solve(args.input_file),
         _ => println!("Problem for day {} not implemented", args.day)
     }
 }
