@@ -19,6 +19,7 @@ fn main() {
         1 => challenges::day1::solve(args.input_file),
         2 => challenges::day2::solve(args.input_file),
         3 => challenges::day3::solve(args.input_file),
+        6 => challenges::day6::solve(args.input_file),
         _ => println!("Problem for day {} not implemented", args.day)
     }
 }
